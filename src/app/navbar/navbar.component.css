@@ -159,11 +159,17 @@
   .navbar-links,
   .navbar-actions {
     display: none;
+
   }
 
   .navbar-links.active,
   .navbar-actions.active {
     display: flex;
+  }
+
+  .nav-link {
+    color: #F9FAFB;
+    text-align: center;
   }
 
   .logout-hidden-mobile {
@@ -172,6 +178,11 @@
 
   .logout-hidden-screen {
     display: none;
+  }
+
+  .icon-img {
+    width: 32px;
+    height: 32px;
   }
 
 }

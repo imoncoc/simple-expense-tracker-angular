@@ -6,15 +6,19 @@
     </p>
   </div>
   <button class="menu-toggle" (click)="toggleMenu()">
-    <span *ngIf="!isMenuOpen" class="material-icons">menu</span>
-    <span *ngIf="isMenuOpen" class="material-icons">close</span>
+    <span *ngIf="!isMenuOpen" class="material-icons">
+      <img class="icon-img" src="../../assets/images/menu.png" alt="" />
+    </span>
+    <span *ngIf="isMenuOpen" class="material-icons">
+      <img class="icon-img" src="../../assets/images/arrow.png" alt="" />
+    </span>
   </button>
   <div class="navbar-links" [class.active]="isMenuOpen">
     <a href="#" class="nav-link">Home</a>
     <a href="#" class="nav-link">About</a>
-    <button class="logout-btn logout-hidden-mobile">Logout</button>
+    <!-- <button class="logout-btn logout-hidden-mobile">Logout</button> -->
   </div>
   <div class="navbar-actions" [class.active]="isMenuOpen">
-    <button class="logout-btn logout-hidden-screen">Logout</button>
+    <!-- <button class="logout-btn logout-hidden-screen">Logout</button> -->
   </div>
 </nav>
