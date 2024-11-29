@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.custom {
+  color: #003049;
+  /* text color */
+  color: #d62828;
+  color: #780000;
+  color: #f77f00;
+  color: #fcbf49;
+  color: #eae2b7;
+  color: #F9FAFB;
+  /* bg color */
+}
+
+.custom-2 {
+  color: #fbfbfe;
+  /* background color */
+  color: #2f27ce;
+  /* color  primary*/
+  color: #dedcff;
+  /* color  secondary*/
+}

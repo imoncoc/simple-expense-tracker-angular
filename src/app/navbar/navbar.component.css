@@ -1,0 +1,153 @@
+/* General Reset */
+
+.custom-2 {
+  color: #fbfbfe;
+  /* background color */
+  color: #2f27ce;
+  /* color  primary*/
+  color: #dedcff;
+  /* color  secondary*/
+}
+
+/* Navbar Container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #4caf50, #81c784);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Logo Section */
+.navbar-logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.1);
+}
+
+/* Links Section */
+.navbar-links {
+  display: flex;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.navbar-links.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ffeb3b;
+}
+
+/* Actions Section */
+.navbar-actions {
+  transition: all 0.3s ease;
+}
+
+.navbar-actions.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 20px;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+.material-icons {
+  font-size: 2rem;
+}
+
+.logout-hidden-mobile {
+  display: none;
+}
+
+.logout-hidden-screen {
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar-links,
+  .navbar-actions {
+    display: none;
+  }
+
+  .navbar-links.active,
+  .navbar-actions.active {
+    display: flex;
+  }
+
+  .logout-hidden-mobile {
+    display: block;
+  }
+
+  .logout-hidden-screen {
+    display: none;
+  }
+
+}
