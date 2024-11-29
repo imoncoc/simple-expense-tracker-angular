@@ -1,0 +1,25 @@
+<div class="table-container">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td>{{ row.name }}</td>
+        <td>{{ row.category }}</td>
+        <td>{{ row.date | date }}</td>
+        <td>{{ row.amount | currency }}</td>
+        <td>
+          <button class="edit-btn" (click)="editRow(row)">Edit</button>
+          <button class="delete-btn" (click)="deleteRow(row)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
