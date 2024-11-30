@@ -10,38 +10,99 @@
   >
     <div class="modal" (click)="$event.stopPropagation()">
       <h2>Add New Expense</h2>
-      <form (ngSubmit)="onSubmit()">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <!-- Input Fields -->
         <div class="form-group">
           <label for="name">Name:</label>
           <input
+            class="inputField"
             type="text"
-            id="name"
-            [(ngModel)]="expenseData.name"
             name="name"
+            id="name"
+            placeholder="Your Name"
+            ngModel
+            #name="ngModel"
             required
           />
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="alert"
+          >
+            <div *ngIf="name.errors?.['required']">Name is required.</div>
+          </div>
         </div>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+          "
+        >
+          <div class="form-group">
+            <label for="name">Date:</label>
+            <input
+              class="inputField"
+              type="date"
+              name="date"
+              id="date"
+              placeholder="Your Name"
+              ngModel
+              #date="ngModel"
+              required
+            />
+            <div
+              *ngIf="date.invalid && (date.dirty || date.touched)"
+              class="alert"
+            >
+              <div *ngIf="date.errors?.['required']">date is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Amount:</label>
+            <input
+              class="inputField"
+              type="number"
+              name="amount"
+              id="amount"
+              placeholder="Your Amount"
+              ngModel
+              #amount="ngModel"
+              required
+            />
+            <div
+              *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+              class="alert"
+            >
+              <div *ngIf="amount.errors?.['required']">amount is required.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
-          <label for="amount">Amount:</label>
-          <input
-            type="number"
-            id="amount"
-            [(ngModel)]="expenseData.amount"
-            name="amount"
+          <label for="category">Category:</label>
+          <select
+            class="inputField"
+            id="category"
+            name="category"
+            ngModel
+            #category="ngModel"
             required
-          />
+          >
+            <option value="" disabled selected>Select a category</option>
+            <option *ngFor="let cat of categories" [value]="cat.value">
+              {{ cat.label }}
+            </option>
+          </select>
+          <div
+            *ngIf="category.invalid && (category.dirty || category.touched)"
+            class="alert"
+          >
+            <div *ngIf="category.errors?.['required']">
+              Category is required.
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            [(ngModel)]="expenseData.date"
-            name="date"
-            required
-          />
-        </div>
+
         <!-- Modal Buttons -->
         <div class="modal-actions">
           <button type="button" class="cancel-btn" (click)="closeModal()">

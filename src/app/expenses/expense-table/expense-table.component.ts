@@ -6,34 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expense-table.component.css'],
 })
 export class ExpenseTableComponent implements OnInit {
+  tableData: any[] = []; // Initialize as an empty array
+
   constructor() {}
 
-  ngOnInit(): void {}
-
-  tableData = [
-    {
-      name: 'John Doe',
-      category: 'Category 1',
-      date: new Date(),
-      amount: 1200,
-    },
-    {
-      name: 'Jane Smith',
-      category: 'Category 2',
-      date: new Date(),
-      amount: 800,
-    },
-    {
-      name: 'Mike Johnson',
-      category: 'Category 3',
-      date: new Date(),
-      amount: 500,
-    },
-  ];
+  ngOnInit(): void {
+    // Fetch data from localStorage on initialization
+    const storedData = localStorage.getItem('formData');
+    this.tableData = storedData ? JSON.parse(storedData) : [];
+  }
 
   // Edit row action
   editRow(row: any): void {
     alert(`Editing row: ${JSON.stringify(row)}`);
+    // Implement edit functionality here
   }
 
   // Delete row action
@@ -41,6 +27,9 @@ export class ExpenseTableComponent implements OnInit {
     const index = this.tableData.indexOf(row);
     if (index !== -1) {
       this.tableData.splice(index, 1);
+
+      // Update localStorage after deletion
+      localStorage.setItem('formData', JSON.stringify(this.tableData));
     }
   }
 }
