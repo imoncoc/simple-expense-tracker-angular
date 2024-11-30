@@ -1,12 +1,57 @@
-<!-- <div class="container mx-auto" style="margin-top: 100px">
-  <p class="primary-color">expenses works!</p>
-
-  <app-expense-table></app-expense-table>
-</div> -->
-
 <div class="new-expense-container container mx-auto" style="margin-top: 100px">
-  <button class="new-expense-btn" (click)="openModal()">New Expense</button>
+  <app-toast #toast></app-toast>
+  <div
+    class="actions-container"
+    style="display: flex; justify-content: space-between; align-items: center"
+  >
+    <button class="new-expense-btn" (click)="openModal()">New Expense</button>
 
+    <div
+      class="filters"
+      style="display: flex; gap: 16px"
+      class="expense-total"
+      *ngIf="tableData.length > 0"
+    >
+      <div>
+        <label class="primary-color" for="startDate">Start Date: </label>
+        <input
+          type="date"
+          id="startDate"
+          [(ngModel)]="filters.startDate"
+          class="filter-input"
+        />
+      </div>
+      <div>
+        <label class="primary-color" for="endDate">End Date: </label>
+        <input
+          type="date"
+          id="endDate"
+          [(ngModel)]="filters.endDate"
+          class="filter-input"
+        />
+      </div>
+
+      <div>
+        <label class="primary-color" for="categoryFilter">Category: </label>
+        <select
+          id="categoryFilter"
+          [(ngModel)]="filters.category"
+          class="filter-input"
+        >
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category.value">
+            {{ category.label }}
+          </option>
+        </select>
+      </div>
+
+      <button class="apply-filters-btn" (click)="applyFilters()">
+        Apply Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal -->
   <app-expense-modal
     [isOpen]="isModalOpen"
     [categories]="categories"
@@ -15,12 +60,14 @@
     (save)="handleSave($event)"
   ></app-expense-modal>
 
+  <!--  Table -->
   <app-expense-table
-    [tableData]="tableData"
+    [tableData]="filteredTableData"
     (edit)="editRow($event)"
     (delete)="deleteRow($event)"
   ></app-expense-table>
-  <div>
-    <p>Total: {{ total }}</p>
+
+  <div class="expense-total" *ngIf="tableData.length > 0">
+    <p>Total: {{ total | currency }}</p>
   </div>
 </div>

@@ -1,0 +1,256 @@
+/* General Container Styles */
+.new-expense-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.actions-container {
+  margin-bottom: 20px;
+}
+
+.new-expense-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.new-expense-btn:hover {
+  background-color: #45a049;
+}
+
+/* Filter Styles */
+.filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+}
+
+.filter-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  flex: 1;
+  /* Makes inputs flexible */
+  min-width: 150px;
+  /* Prevents inputs from becoming too small */
+}
+
+.apply-filters-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex: 1;
+  /* Makes the button flexible */
+  min-width: 150px;
+  /* Prevents button from becoming too small */
+}
+
+.apply-filters-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  /* Adjusts buttons for smaller screens */
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.submit-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+.submit-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.total {
+  text-align: right;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.expense-total {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.expense-total p {
+  background-color: #eae2b7;
+  color: #003049;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .new-expense-btn {
+    width: 100%;
+  }
+
+  .apply-filters-btn {
+    width: 100%;
+  }
+
+  .modal {
+    padding: 10px;
+    width: 90%;
+    /* Adjust modal width */
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    /* Adds horizontal scrolling for smaller screens */
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+    /* Prevents table data from breaking into new lines */
+  }
+
+  .total {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .expense-total p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .new-expense-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .apply-filters-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .modal {
+    padding: 8px;
+    width: 95%;
+  }
+
+  .modal-actions {
+    gap: 8px;
+  }
+}

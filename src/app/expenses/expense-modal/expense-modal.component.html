@@ -7,13 +7,13 @@
     <h2>{{ editingRow ? "Edit Expense" : "Add New Expense" }}</h2>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
       <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name">Item name:</label>
         <input
           class="inputField"
           type="text"
           name="name"
           id="name"
-          placeholder="Your Name"
+          placeholder="Item Name"
           [ngModel]="editingRow?.name || ''"
           #name="ngModel"
           required
@@ -52,6 +52,7 @@
             type="number"
             name="amount"
             id="amount"
+            placeholder="Amount"
             [ngModel]="editingRow?.amount || ''"
             #amount="ngModel"
             required

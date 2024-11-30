@@ -8,6 +8,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { ExpenseTableComponent } from './expenses/expense-table/expense-table.component';
 import { ExpenseModalComponent } from './expenses/expense-modal/expense-modal.component';
 import { FormsModule } from '@angular/forms';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     ExpensesComponent,
     ExpenseTableComponent,
     ExpenseModalComponent,
+    ToastComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

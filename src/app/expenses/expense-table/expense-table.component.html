@@ -1,5 +1,6 @@
 <div class="table-container">
-  <table class="responsive-table">
+  <p class="p-add-data" *ngIf="tableData.length === 0">No data available!</p>
+  <table class="responsive-table" *ngIf="tableData.length > 0">
     <thead>
       <tr>
         <th>Name</th>
@@ -12,10 +13,12 @@
     <tbody>
       <tr *ngFor="let row of tableData">
         <td>{{ row.name }}</td>
-        <td>{{ row.category }}</td>
+        <td class="">
+          <span class="chip">{{ row.category }}</span>
+        </td>
         <td>{{ row.date | date }}</td>
         <td>{{ row.amount | currency }}</td>
-        <td>
+        <td class="btn-container">
           <button class="edit-btn" (click)="edit.emit(row)">Edit</button>
           <button class="delete-btn" (click)="delete.emit(row)">Delete</button>
         </td>

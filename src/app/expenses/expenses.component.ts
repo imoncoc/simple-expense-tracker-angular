@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-expenses',
@@ -6,33 +7,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expenses.component.css'],
 })
 export class ExpensesComponent implements OnInit {
+  @ViewChild(ToastComponent) toast!: ToastComponent; // Correct ViewChild usage
+
   isModalOpen: boolean = false;
   categories = [
     { value: 'food', label: 'Food' },
     { value: 'travel', label: 'Travel' },
     { value: 'shopping', label: 'Shopping' },
+    { value: 'health', label: 'Health' },
+    { value: 'education', label: 'Education' },
+    { value: 'utilities', label: 'Utilities' },
+    { value: 'transport', label: 'Transport' },
+    { value: 'others', label: 'Others' },
   ];
   tableData: any[] = [];
+  filteredTableData: any[] = [];
+  filters = {
+    startDate: '',
+    endDate: '',
+    category: '',
+  };
   editingRow: any = null;
   localStorageKey = 'expenseData';
-  total!: number;
+  total: number = 0;
 
   ngOnInit(): void {
-    // Load data from localStorage on initialization
     const storedData = localStorage.getItem(this.localStorageKey);
     this.tableData = storedData ? JSON.parse(storedData) : [];
-    this.updateTotal();
-  }
-
-  updateTotal(): void {
-    // Recalculate the total amount
-    this.total = this.tableData.reduce((sum, item) => sum + item.amount, 0);
+    this.applyFilters(); // Initialize filtered data
   }
 
   saveToLocalStorage(): void {
-    // Save table data to localStorage
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.tableData));
-    this.updateTotal();
   }
 
   openModal(row: any = null): void {
@@ -46,17 +52,15 @@ export class ExpensesComponent implements OnInit {
 
   handleSave(data: any): void {
     if (this.editingRow) {
-      // Update existing entry
       const index = this.tableData.findIndex(
         (row) => row.id === this.editingRow.id
       );
       if (index !== -1) this.tableData[index] = data;
     } else {
-      // Add new entry
       this.tableData.push(data);
     }
-
     this.saveToLocalStorage();
+    this.applyFilters(); // Reapply filters after saving
     this.closeModal();
   }
 
@@ -67,5 +71,35 @@ export class ExpensesComponent implements OnInit {
   deleteRow(row: any): void {
     this.tableData = this.tableData.filter((r) => r !== row);
     this.saveToLocalStorage();
+    this.applyFilters(); // Reapply filters after deletion
+    this.toast.showToast('Expense deleted!', 'success'); // Correct usage
+  }
+
+  applyFilters(): void {
+    if (
+      this.filters.startDate.length > 0 &&
+      this.filters.endDate.length > 0 &&
+      new Date(this.filters.startDate) > new Date(this.filters.endDate)
+    ) {
+      return alert('Start date must be earlier than the end date.');
+    }
+    this.filteredTableData = this.tableData.filter((row) => {
+      const matchesCategory =
+        !this.filters.category || row.category === this.filters.category;
+
+      const matchesDate =
+        (!this.filters.startDate ||
+          new Date(row.date) >= new Date(this.filters.startDate)) &&
+        (!this.filters.endDate ||
+          new Date(row.date) <= new Date(this.filters.endDate));
+
+      return matchesCategory && matchesDate;
+    });
+
+    // Update total dynamically
+    this.total = this.filteredTableData.reduce(
+      (sum, row) => sum + row.amount,
+      0
+    );
   }
 }
