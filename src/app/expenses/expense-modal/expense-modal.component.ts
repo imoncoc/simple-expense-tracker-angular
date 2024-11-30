@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-expense-modal',
@@ -6,70 +6,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expense-modal.component.css'],
 })
 export class ExpenseModalComponent implements OnInit {
-  categories = [
-    { label: 'Food', value: 'food' },
-    { label: 'Travel', value: 'travel' },
-    { label: 'Other', value: 'other' },
-  ];
+  // categories = [
+  //   { label: 'Food', value: 'food' },
+  //   { label: 'Travel', value: 'travel' },
+  //   { label: 'Other', value: 'other' },
+  // ];
 
   constructor() {}
 
   ngOnInit(): void {}
-  isModalOpen: boolean = false; // Modal state
-  expenseData = {
-    name: '',
-    amount: null,
-    date: '',
-  };
 
-  // Open the modal
-  openModal(): void {
-    this.isModalOpen = true;
-  }
+  @Input() isOpen: boolean = false;
+  @Input() categories: any[] = [];
+  @Input() editingRow: any = null;
 
-  // Close the modal
+  @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<any>();
+
   closeModal(): void {
-    this.isModalOpen = false;
-    this.resetForm();
+    this.close.emit();
   }
+
   closeModalOnBackdrop(event: Event): void {
-    if (event.target === event.currentTarget) {
-      this.closeModal();
-    }
+    this.close.emit();
   }
 
-  // Reset form data
-  resetForm(): void {
-    this.expenseData = {
-      name: '',
-      amount: null,
-      date: '',
-    };
-  }
-
-  // Submit data
-  // onSubmit(): void {
-  //   console.log('Expense Data:', this.expenseData);
-  //   this.closeModal();
-  // }
-  onSubmit(form: any) {
+  onSubmit(form: any): void {
     if (form.valid) {
       const formData = {
-        ...form.value,
-        id: new Date().getTime(), // Generate a unique ID
+        id: this.editingRow?.id || new Date().getTime(),
+        name: form.value.name,
+        date: form.value.date,
+        amount: form.value.amount,
+        category: form.value.category,
       };
 
-      // Get existing data from localStorage
-      const existingData = JSON.parse(localStorage.getItem('formData') || '[]');
-
-      // Add the new data
-      existingData.push(formData);
-
-      // Store updated data back into localStorage
-      localStorage.setItem('formData', JSON.stringify(existingData));
-
-      console.log('Form Data Submitted:', formData);
-      this.closeModal();
+      this.save.emit(formData);
+      form.reset();
     }
   }
 }

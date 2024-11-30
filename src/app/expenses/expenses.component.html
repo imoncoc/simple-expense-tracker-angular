@@ -1,5 +1,26 @@
-<div class="container mx-auto" style="margin-top: 100px">
+<!-- <div class="container mx-auto" style="margin-top: 100px">
   <p class="primary-color">expenses works!</p>
 
   <app-expense-table></app-expense-table>
+</div> -->
+
+<div class="new-expense-container container mx-auto" style="margin-top: 100px">
+  <button class="new-expense-btn" (click)="openModal()">New Expense</button>
+
+  <app-expense-modal
+    [isOpen]="isModalOpen"
+    [categories]="categories"
+    [editingRow]="editingRow"
+    (close)="closeModal()"
+    (save)="handleSave($event)"
+  ></app-expense-modal>
+
+  <app-expense-table
+    [tableData]="tableData"
+    (edit)="editRow($event)"
+    (delete)="deleteRow($event)"
+  ></app-expense-table>
+  <div>
+    <p>Total: {{ total }}</p>
+  </div>
 </div>
