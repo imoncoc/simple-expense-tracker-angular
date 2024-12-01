@@ -7,18 +7,18 @@ import { ToastComponent } from '../toast/toast.component';
   styleUrls: ['./expenses.component.css'],
 })
 export class ExpensesComponent implements OnInit {
-  @ViewChild(ToastComponent) toast!: ToastComponent; // Correct ViewChild usage
+  @ViewChild(ToastComponent) toast!: ToastComponent;
 
   isModalOpen: boolean = false;
   categories = [
-    { value: 'food', label: 'Food' },
-    { value: 'travel', label: 'Travel' },
-    { value: 'shopping', label: 'Shopping' },
-    { value: 'health', label: 'Health' },
-    { value: 'education', label: 'Education' },
-    { value: 'utilities', label: 'Utilities' },
-    { value: 'transport', label: 'Transport' },
-    { value: 'others', label: 'Others' },
+    { value: 'food', label: 'Food 🍽️' },
+    { value: 'travel', label: 'Travel ✈️' },
+    { value: 'shopping', label: 'Shopping 🛒' },
+    { value: 'health', label: 'Health ❤️' },
+    { value: 'education', label: 'Education 🎓' },
+    { value: 'utilities', label: 'Utilities 💡' },
+    { value: 'transport', label: 'Transport 🚗' },
+    { value: 'others', label: 'Others ⚙️' },
   ];
   tableData: any[] = [];
   filteredTableData: any[] = [];
@@ -34,7 +34,7 @@ export class ExpensesComponent implements OnInit {
   ngOnInit(): void {
     const storedData = localStorage.getItem(this.localStorageKey);
     this.tableData = storedData ? JSON.parse(storedData) : [];
-    this.applyFilters(); // Initialize filtered data
+    this.applyFilters();
   }
 
   saveToLocalStorage(): void {
@@ -62,20 +62,19 @@ export class ExpensesComponent implements OnInit {
       this.toast.showToast('New expense added.', 'success');
     }
     this.saveToLocalStorage();
-    this.applyFilters(); // Reapply filters after saving
+    this.applyFilters();
     this.closeModal();
   }
 
   editRow(row: any): void {
     this.openModal(row);
-    // console.log(first)
   }
 
   deleteRow(row: any): void {
     this.tableData = this.tableData.filter((r) => r !== row);
     this.saveToLocalStorage();
-    this.applyFilters(); // Reapply filters after deletion
-    this.toast.showToast('Expense deleted!', 'error'); // Correct usage
+    this.applyFilters();
+    this.toast.showToast('Expense deleted!', 'error');
   }
 
   applyFilters(): void {
