@@ -55,9 +55,11 @@ export class ExpensesComponent implements OnInit {
       const index = this.tableData.findIndex(
         (row) => row.id === this.editingRow.id
       );
+      this.toast.showToast('Expense Updated!', 'success');
       if (index !== -1) this.tableData[index] = data;
     } else {
       this.tableData.push(data);
+      this.toast.showToast('New expense added.', 'success');
     }
     this.saveToLocalStorage();
     this.applyFilters(); // Reapply filters after saving
@@ -72,7 +74,7 @@ export class ExpensesComponent implements OnInit {
     this.tableData = this.tableData.filter((r) => r !== row);
     this.saveToLocalStorage();
     this.applyFilters(); // Reapply filters after deletion
-    // this.toast.showToast('Expense deleted!', 'success'); // Correct usage
+    this.toast.showToast('Expense deleted!', 'success'); // Correct usage
   }
 
   applyFilters(): void {

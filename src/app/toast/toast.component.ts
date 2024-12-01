@@ -12,6 +12,11 @@ export class ToastComponent implements OnInit {
   showToast(message: string, type: 'success' | 'error' = 'success'): void {
     this.message = message;
     this.type = type;
+
+    // Automatically clear the toast message after 3 seconds
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
   }
 
   ngOnInit(): void {}
