@@ -74,7 +74,7 @@ export class ExpensesComponent implements OnInit {
     this.tableData = this.tableData.filter((r) => r !== row);
     this.saveToLocalStorage();
     this.applyFilters(); // Reapply filters after deletion
-    this.toast.showToast('Expense deleted!', 'success'); // Correct usage
+    this.toast.showToast('Expense deleted!', 'error'); // Correct usage
   }
 
   applyFilters(): void {
