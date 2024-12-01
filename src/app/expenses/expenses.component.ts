@@ -68,6 +68,7 @@ export class ExpensesComponent implements OnInit {
 
   editRow(row: any): void {
     this.openModal(row);
+    // console.log(first)
   }
 
   deleteRow(row: any): void {
